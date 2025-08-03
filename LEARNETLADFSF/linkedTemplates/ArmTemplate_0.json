@@ -1,0 +1,97 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "LEARNETLADFSF"
+		},
+		"Snowflake1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Snowflake1'"
+		},
+		"Openweather_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://api.openweathermap.org/data/2.5/weather"
+		},
+		"Snowflake1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "BRONZE_DB"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Openweather')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"lat": {
+						"type": "string",
+						"defaultValue": "13.19"
+					},
+					"lon": {
+						"type": "string",
+						"defaultValue": "79.19"
+					}
+				},
+				"annotations": [],
+				"type": "RestService",
+				"typeProperties": {
+					"url": "[parameters('Openweather_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Snowflake1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SnowflakeV2",
+				"typeProperties": {
+					"authenticationType": "Basic",
+					"accountIdentifier": "IKJKBUY-AZC26964",
+					"user": "Yog",
+					"database": "[parameters('Snowflake1_properties_typeProperties_database')]",
+					"warehouse": "COMPUTE_WH",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Snowflake1_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/openweatherjson')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "POC",
+				"linkedServiceName": {
+					"referenceName": "Openweather",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"lat": "13.19",
+						"lon": "79.19"
+					}
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Openweather')]"
+			]
+		}
+	]
+}
