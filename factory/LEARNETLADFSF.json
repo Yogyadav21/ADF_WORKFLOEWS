@@ -1,0 +1,14 @@
+{
+	"name": "LEARNETLADFSF",
+	"properties": {
+		"globalConfigurations": {
+			"PipelineBillingEnabled": "true"
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "47216db6-5a59-4fbd-9e93-6adef888989b",
+		"tenantId": "7c40cf67-bb02-4fe1-aade-69d352579be6"
+	}
+}
