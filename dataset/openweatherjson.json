@@ -1,0 +1,17 @@
+{
+	"name": "openweatherjson",
+	"properties": {
+		"description": "POC",
+		"linkedServiceName": {
+			"referenceName": "Openweather",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"lat": "13.19",
+				"lon": "79.19"
+			}
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
