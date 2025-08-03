@@ -1,0 +1,21 @@
+{
+	"name": "SnowflakeTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Snowflake1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "RESPONSE_DATA",
+				"type": "VARIANT"
+			}
+		],
+		"typeProperties": {
+			"schema": "RAW",
+			"table": "OPENWEATHER"
+		}
+	}
+}
