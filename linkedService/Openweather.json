@@ -1,6 +1,5 @@
 {
 	"name": "Openweather",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"parameters": {
 			"lat": {
@@ -10,6 +9,10 @@
 			"lon": {
 				"type": "string",
 				"defaultValue": "79.19"
+			},
+			"appid": {
+				"type": "string",
+				"defaultValue": "2c3c18105482774b45e7311ab1ab2323"
 			}
 		},
 		"annotations": [],
@@ -17,8 +20,8 @@
 		"typeProperties": {
 			"url": "https://api.openweathermap.org/data/2.5/weather",
 			"enableServerCertificateValidation": true,
-			"authenticationType": "Anonymous",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEMyQjhFNEQyLUNENzQtNDk1OS05QjJFLTQ2MzkwNjdFQTBCQl8xYjc2YTRlNi0wZGFlLTRiZjEtYTUwYi1jZWUyZTY5NjgzYmMiDQp9"
+			"authenticationType": "Anonymous"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }
