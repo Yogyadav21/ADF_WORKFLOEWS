@@ -2,7 +2,9 @@
 	"name": "LEARNETLADFSF",
 	"properties": {
 		"globalConfigurations": {
-			"PipelineBillingEnabled": "true"
+			"PipelineBillingEnabled": "true",
+			"factoryStagingLSReferenceName": "linkedService1",
+			"factoryStagingLSType": "LinkedServiceReference"
 		}
 	},
 	"location": "eastus",
