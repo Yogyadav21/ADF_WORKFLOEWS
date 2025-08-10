@@ -32,7 +32,33 @@
 							"storageIntegration": "AZURE_BLOB_INT"
 						}
 					},
-					"enableStaging": false
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "linkedService1",
+							"type": "LinkedServiceReference"
+						},
+						"path": "apidata",
+						"enableCompression": true
+					},
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "linkedService1",
+								"type": "LinkedServiceReference"
+							},
+							"path": "apidata"
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mapComplexValuesToString": false
+					}
 				},
 				"inputs": [
 					{
