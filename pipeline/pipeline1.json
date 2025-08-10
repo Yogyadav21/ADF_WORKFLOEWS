@@ -28,7 +28,8 @@
 					"sink": {
 						"type": "SnowflakeV2Sink",
 						"importSettings": {
-							"type": "SnowflakeImportCopyCommand"
+							"type": "SnowflakeImportCopyCommand",
+							"storageIntegration": "AZURE_BLOB_INT"
 						}
 					},
 					"enableStaging": false
@@ -72,6 +73,7 @@
 				}
 			}
 		],
+		"concurrency": 1,
 		"annotations": []
 	}
 }
