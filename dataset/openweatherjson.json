@@ -4,12 +4,7 @@
 		"description": "POC",
 		"linkedServiceName": {
 			"referenceName": "Openweather",
-			"type": "LinkedServiceReference",
-			"parameters": {
-				"lat": "13.19",
-				"lon": "79.19",
-				"appid": "2c3c18105482774b45e7311ab1ab2323"
-			}
+			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "RestResource",
