@@ -6,7 +6,14 @@
 				"name": "API_TO_SF",
 				"description": "POC",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "temparature",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -26,10 +33,12 @@
 						}
 					},
 					"sink": {
-						"type": "SnowflakeV2Sink",
-						"importSettings": {
-							"type": "SnowflakeImportCopyCommand",
-							"storageIntegration": "AZURE_BLOB_INT"
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
 						}
 					},
 					"enableStaging": true,
@@ -54,10 +63,6 @@
 							},
 							"path": "apidata"
 						}
-					},
-					"translator": {
-						"type": "TabularTranslator",
-						"mapComplexValuesToString": false
 					}
 				},
 				"inputs": [
@@ -68,7 +73,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "SnowflakeTable1",
+						"referenceName": "Json1",
 						"type": "DatasetReference"
 					}
 				]
@@ -97,9 +102,41 @@
 						"type": "DatasetReference"
 					}
 				}
+			},
+			{
+				"name": "temparature",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "temp",
+					"value": {
+						"value": "@activity('Lookup1').output.firstRow.AIR_TEMPERATURE_K",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"concurrency": 1,
+		"variables": {
+			"temp": {
+				"type": "String"
+			},
+			"temparature": {
+				"type": "Array"
+			}
+		},
 		"annotations": []
 	}
 }
